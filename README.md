@@ -16,7 +16,7 @@ python train.py --help
 ## Guide to experimental replication
 Experimental results described in original paper(https://arxiv.org/abs/1710.10903) for each dataset could be reproduced by setting up the following.
 Please specify the following parameters using the command line arguments.
-| dataset | c | weight_decay |
+| dataset | n_class | weight_decay |
 |:---:|:---:|:---:|
 | Cora | 7 | 5e-4 |
 | CiteSeer | 6 | 5e-4 |
