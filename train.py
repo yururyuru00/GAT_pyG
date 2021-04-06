@@ -50,15 +50,13 @@ def main():
     # Training settings
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', type=str, default='Cora', help='name of dataset of {Cora, CiteSeer, PubMed}')
+    parser.add_argument('--n_class', type=int, default=7, help='number of class')
     parser.add_argument('--epochs', type=int, default=200, help='Number of epochs to train.')
     parser.add_argument('--lr', type=float, default=0.005, help='Initial learning rate.')
     parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay (L2 loss on parameters).')
     parser.add_argument('--hidden', type=int, default=8, help='Number of hidden units.')
-    parser.add_argument('--n_heads', type=int, default=8, help='Number of head attentions.')
+    parser.add_argument('--n_heads', type=int, default=8, help='Number of head attentions (1th layer)')
     parser.add_argument('--dropout', type=float, default=0.6, help='Dropout rate (1 - keep probability).')
-    parser.add_argument('--alpha', type=float, default=0.2, help='Alpha for the leaky_relu.')
-    parser.add_argument('--pos_sample', type=int, default=1, help='number of positive sample')
-    parser.add_argument('--neg_sample', type=int, default=5, help='number of negative sample')
     args = parser.parse_args()
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -66,8 +64,8 @@ def main():
     data = dataset[0].to(device)
     print(data)
 
-    n_features, n_class = data.x.size()[1], torch.max(data.y).data.item() + 1
-    model = GATNet(args.dataset, n_features, args.hidden, n_class, args.dropout, args.n_heads).to(device)
+    n_features = data.x.size()[1]
+    model = GATNet(args.dataset, n_features, args.hidden, args.n_class, args.dropout, args.n_heads).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     for epoch in range(1, 501):
