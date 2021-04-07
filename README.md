@@ -20,4 +20,4 @@ Please specify the following parameters using the command line arguments.
 |:---:|:---:|:---:|
 | Cora | 7 | 5e-4 |
 | CiteSeer | 6 | 5e-4 |
-| PubMed | 20 | 1e-3 |
+| PubMed | 3 | 1e-3 |
